@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/PrismaService';
-import { IFindByIdBookDTO } from './dtos/find-by-id-book.dto';
+import { Book } from '../entities/Book';
 
 @Injectable()
 export class FindByIdBookService {
   constructor(private prisma: PrismaService) {}
 
-  async findOneById(id: string): Promise<IFindByIdBookDTO | Error> {
+  async findOneById(id: string): Promise<Book | Error> {
     const bookExists = await this.prisma.book.findFirst({
       where: { id },
     });

@@ -1,13 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/PrismaService';
-import { IFindByBarCodeBookDTO } from './dtos/find-by-bar-code-book.dto';
+import { Book } from '../entities/Book';
 
 @Injectable()
 export class FindByBarCodeBookService {
-  constructor(private prisma: PrismaService) {}
-  async findByBarCode(
-    bar_code: string,
-  ): Promise<IFindByBarCodeBookDTO | Error> {
+  constructor(private prisma: PrismaService) { }
+  async findByBarCode(bar_code: string): Promise<Book | Error> {
     const bookExists = await this.prisma.book.findUnique({
       where: { bar_code },
     });

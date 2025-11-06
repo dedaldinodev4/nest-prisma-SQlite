@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/PrismaService';
 import { ICreateBook } from './dtos/create-book.dto';
+import { Book } from '../entities/Book'
 
 @Injectable()
 export class CreateBookService {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: ICreateBook): Promise<ICreateBook | Error> {
+  async create(data: ICreateBook): Promise<Book | Error> {
     const bookExists = await this.prisma.book.findUnique({
       where: { bar_code: data.bar_code },
     });

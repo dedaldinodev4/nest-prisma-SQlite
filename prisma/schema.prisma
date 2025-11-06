@@ -15,7 +15,19 @@ model Book {
   title String
   description String 
   bar_code  String @unique
+  categoryId  String
   created_at DateTime @default(now())
+  category Category @relation(fields: [categoryId] , references: [id])   
 
   @@map("_books")
+
+}
+
+model Category {
+  id String @id @default(uuid())
+  name  String @unique
+  created_at DateTime @default(now())
+  books Book[]
+
+  @@map("_categories")
 }
